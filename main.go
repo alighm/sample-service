@@ -85,7 +85,7 @@ func wrapMiddleware(router openapi.Router) openapi.Router {
 
 func createServer(router *mux.Router) *http.Server {
 	return &http.Server{
-		Addr:              ":" + strconv.Itoa(viper.GetInt("APP_PORT")),
+		Addr:              ":" + strconv.Itoa(viper.GetInt("PORT")),
 		ReadHeaderTimeout: timeout * time.Second,
 		Handler:           router,
 	}
