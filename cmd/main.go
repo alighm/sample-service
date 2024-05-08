@@ -76,7 +76,7 @@ func wrapMiddleware(router openapi.Router) openapi.Router {
 		// 3. AuthZ (if applicable)
 
 		// every route requires Custom Headers to be handled
-		route.HandlerFunc = cm.CustomHeaders(viper.GetStringSlice("app.versions"), route.HandlerFunc)
+		route.HandlerFunc = cm.CustomHeaders(viper.GetStringSlice("APP_VERSIONS"), route.HandlerFunc)
 		routes[key] = route
 	}
 

@@ -26,6 +26,5 @@ Dockerfile
 go.mod
 README.md
 
-go/api_company_service.go
 go/api_user_service.go
 go/logger.go

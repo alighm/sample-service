@@ -1,14 +1,12 @@
 openapi: 3.0.0
 info:
   description: >-
-    This is a sample Go Reference
+    This is a sample service
   version: v1
-  title: OpenAPI Go Reference Service
+  title: Sample Service
 tags:
   - name: User
     description: Everything about your Users
-  - name: Company
-    description: Everything about your Companies
 paths:
   /users:
     post:
@@ -138,134 +136,6 @@ paths:
           $ref: '#/components/responses/400'
         '204':
           $ref: '#/components/responses/204'
-  /companies:
-    post:
-      tags:
-        - Company
-      summary: Add a new company
-      description: 'Inserting a new company'
-      operationId: addCompany
-      responses:
-        '201':
-          description: Successful Operation
-          headers:
-            location:
-              schema:
-                type: string
-              description: The location of newly created company
-        '400':
-          $ref: '#/components/responses/400'
-      requestBody:
-        $ref: '#/components/requestBodies/Company'
-      parameters:
-        - in: header
-          name: X-Request-ID
-          schema:
-            type: string
-            format: uuid
-          required: true
-    get:
-      tags:
-        - Company
-      summary: Get all companies
-      description: 'retrieving all companies'
-      operationId: getCompanies
-      responses:
-        '200':
-          description: Successful Operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Company_View'
-      parameters:
-        - in: header
-          name: X-Request-ID
-          schema:
-            type: string
-            format: uuid
-          required: true
-  '/companies/{companyId}':
-    get:
-      tags:
-        - Company
-      summary: Find company by ID
-      description: Returns a single company
-      operationId: getCompany
-      parameters:
-        - in: header
-          name: X-Request-ID
-          schema:
-            type: string
-            format: uuid
-          required: true
-        - name: companyId
-          in: path
-          description: ID of company to return
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '200':
-          description: Successful Operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Company_View'
-        '400':
-          $ref: '#/components/responses/400'
-        '404':
-          $ref: '#/components/responses/404'
-    put:
-      tags:
-        - Company
-      summary: Updates a company
-      description: 'Updates a single company'
-      operationId: updateCompany
-      parameters:
-        - in: header
-          name: X-Request-ID
-          schema:
-            type: string
-            format: uuid
-          required: true
-        - name: companyId
-          in: path
-          description: ID of company that needs to be updated
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '400':
-          $ref: '#/components/responses/400'
-      requestBody:
-        $ref: '#/components/requestBodies/Company'
-    delete:
-      tags:
-        - Company
-      summary: Deletes a company
-      description: 'Removing a company'
-      operationId: deleteCompany
-      parameters:
-        - in: header
-          name: X-Request-ID
-          schema:
-            type: string
-            format: uuid
-          required: true
-        - name: companyId
-          in: path
-          description: Company id to delete
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        '400':
-          $ref: '#/components/responses/400'
-        '204':
-          $ref: '#/components/responses/204'
 components:
   requestBodies:
     User:
@@ -274,13 +144,6 @@ components:
           schema:
             $ref: '#/components/schemas/User'
       description: User Object
-      required: true
-    Company:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Company'
-      description: Company Object
       required: true
   schemas:
     User:
@@ -295,9 +158,6 @@ components:
         email:
           type: string
           format: email
-        company_id:
-          type: string
-          format: uuid
     User_View:
       title: User View
       description: A User View for Reference Service
@@ -313,36 +173,6 @@ components:
         email:
           type: string
           format: email
-        company_id:
-          type: string
-          format: uuid
-    Company:
-      title: Company
-      description: A Company for Reference Service
-      type: object
-      properties:
-        name:
-          type: string
-        address:
-          type: string
-        created_on:
-          type: string
-          format: date-time
-    Company_View:
-      title: Company View
-      description: A Company View for Reference Service
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        address:
-          type: string
-        created_on:
-          type: string
-          format: date-time
     Error:
       title: Error
       description: Error

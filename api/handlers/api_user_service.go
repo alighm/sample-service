@@ -62,7 +62,12 @@ func (s *UserAPIService) GetUser(ctx context.Context, xRequestID string, userId 
 	// Add api_user_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, UserView{}) or use other options such as http.Ok ...
-	// return Response(200, UserView{}), nil
+	return Response(200, UserView{
+		Id:        "52864284-5807-42BD-93B8-79D21BE02D87",
+		FirstName: "John",
+		LastName:  "Doe",
+		Email:     "john.doe@example.com",
+	}), nil
 
 	// TODO: Uncomment the next line to return response Response(400, Error{}) or use other options such as http.Ok ...
 	// return Response(400, Error{}), nil
@@ -70,7 +75,7 @@ func (s *UserAPIService) GetUser(ctx context.Context, xRequestID string, userId 
 	// TODO: Uncomment the next line to return response Response(404, {}) or use other options such as http.Ok ...
 	// return Response(404, nil),nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("GetUser method not implemented")
+	//return Response(http.StatusNotImplemented, nil), errors.New("GetUser method not implemented")
 }
 
 // GetUsers - Get all users
@@ -79,9 +84,14 @@ func (s *UserAPIService) GetUsers(ctx context.Context, xRequestID string) (ImplR
 	// Add api_user_service.go to the .openapi-generator-ignore to avoid overwriting this service implementation when updating open api generation.
 
 	// TODO: Uncomment the next line to return response Response(200, UserView{}) or use other options such as http.Ok ...
-	// return Response(200, UserView{}), nil
+	return Response(200, []UserView{{
+		Id:        "52864284-5807-42BD-93B8-79D21BE02D87",
+		FirstName: "John",
+		LastName:  "Doe",
+		Email:     "john.doe@example.com",
+	}}), nil
 
-	return Response(http.StatusNotImplemented, nil), errors.New("GetUsers method not implemented")
+	//return Response(http.StatusNotImplemented, nil), errors.New("GetUsers method not implemented")
 }
 
 // UpdateUser - Updates a user
