@@ -1,0 +1,11 @@
+coverage.out
+.idea
+properties.yaml
+vendor
+*.zip
+hostname
+hosts
+resolv.conf
+tmp
+bin
+*.json

@@ -1,0 +1,366 @@
+openapi: 3.0.0
+info:
+  description: >-
+    This is a sample Go Reference
+  version: v1
+  title: OpenAPI Go Reference Service
+tags:
+  - name: User
+    description: Everything about your Users
+  - name: Company
+    description: Everything about your Companies
+paths:
+  /users:
+    post:
+      tags:
+        - User
+      summary: Add a new user
+      description: 'Inserting a new user'
+      operationId: addUser
+      responses:
+        '201':
+          description: Successful Operation
+          headers:
+            location:
+              schema:
+                type: string
+              description: The location of newly created user
+        '400':
+          $ref: '#/components/responses/400'
+      requestBody:
+        $ref: '#/components/requestBodies/User'
+      parameters:
+        - in: header
+          name: X-Request-ID
+          schema:
+            type: string
+            format: uuid
+          required: true
+    get:
+      tags:
+        - User
+      summary: Get all users
+      description: 'retrieving all users'
+      operationId: getUsers
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User_View'
+      parameters:
+        - in: header
+          name: X-Request-ID
+          schema:
+            type: string
+            format: uuid
+          required: true
+  '/users/{userId}':
+    get:
+      tags:
+        - User
+      summary: Find user by ID
+      description: Returns a single user
+      operationId: getUser
+      parameters:
+        - in: header
+          name: X-Request-ID
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: userId
+          in: path
+          description: ID of user to return
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User_View'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          description: User not found
+    put:
+      tags:
+        - User
+      summary: Updates a user
+      description: 'Updates a single user'
+      operationId: updateUser
+      parameters:
+        - in: header
+          name: X-Request-ID
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: userId
+          in: path
+          description: ID of user that needs to be updated
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '400':
+          $ref: '#/components/responses/400'
+      requestBody:
+        $ref: '#/components/requestBodies/User'
+    delete:
+      tags:
+        - User
+      summary: Deletes a user
+      description: 'Removing a user'
+      operationId: deleteUser
+      parameters:
+        - in: header
+          name: X-Request-ID
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: userId
+          in: path
+          description: User id to delete
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '400':
+          $ref: '#/components/responses/400'
+        '204':
+          $ref: '#/components/responses/204'
+  /companies:
+    post:
+      tags:
+        - Company
+      summary: Add a new company
+      description: 'Inserting a new company'
+      operationId: addCompany
+      responses:
+        '201':
+          description: Successful Operation
+          headers:
+            location:
+              schema:
+                type: string
+              description: The location of newly created company
+        '400':
+          $ref: '#/components/responses/400'
+      requestBody:
+        $ref: '#/components/requestBodies/Company'
+      parameters:
+        - in: header
+          name: X-Request-ID
+          schema:
+            type: string
+            format: uuid
+          required: true
+    get:
+      tags:
+        - Company
+      summary: Get all companies
+      description: 'retrieving all companies'
+      operationId: getCompanies
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company_View'
+      parameters:
+        - in: header
+          name: X-Request-ID
+          schema:
+            type: string
+            format: uuid
+          required: true
+  '/companies/{companyId}':
+    get:
+      tags:
+        - Company
+      summary: Find company by ID
+      description: Returns a single company
+      operationId: getCompany
+      parameters:
+        - in: header
+          name: X-Request-ID
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: companyId
+          in: path
+          description: ID of company to return
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company_View'
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+    put:
+      tags:
+        - Company
+      summary: Updates a company
+      description: 'Updates a single company'
+      operationId: updateCompany
+      parameters:
+        - in: header
+          name: X-Request-ID
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: companyId
+          in: path
+          description: ID of company that needs to be updated
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '400':
+          $ref: '#/components/responses/400'
+      requestBody:
+        $ref: '#/components/requestBodies/Company'
+    delete:
+      tags:
+        - Company
+      summary: Deletes a company
+      description: 'Removing a company'
+      operationId: deleteCompany
+      parameters:
+        - in: header
+          name: X-Request-ID
+          schema:
+            type: string
+            format: uuid
+          required: true
+        - name: companyId
+          in: path
+          description: Company id to delete
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '400':
+          $ref: '#/components/responses/400'
+        '204':
+          $ref: '#/components/responses/204'
+components:
+  requestBodies:
+    User:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+      description: User Object
+      required: true
+    Company:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Company'
+      description: Company Object
+      required: true
+  schemas:
+    User:
+      title: User
+      description: A User for Reference Service
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        company_id:
+          type: string
+          format: uuid
+    User_View:
+      title: User View
+      description: A User View for Reference Service
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        company_id:
+          type: string
+          format: uuid
+    Company:
+      title: Company
+      description: A Company for Reference Service
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        created_on:
+          type: string
+          format: date-time
+    Company_View:
+      title: Company View
+      description: A Company View for Reference Service
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        address:
+          type: string
+        created_on:
+          type: string
+          format: date-time
+    Error:
+      title: Error
+      description: Error
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+  responses:
+    204:
+      description: "Entity Deleted"
+    404:
+      description: "Entity Not Found"
+    400:
+      description: "Bad Request"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
